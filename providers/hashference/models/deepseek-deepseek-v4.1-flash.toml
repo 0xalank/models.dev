@@ -1,0 +1,25 @@
+# Relayed through OpenRouter. Price and limits: https://hashference.com/models/deepseek-deepseek-v4.1-flash and https://hashference.com/v1/catalog (credits per million tokens; 1,000 credits = $1).
+# Capabilities follow providers/openrouter/models/deepseek/deepseek-v4.1-flash.toml: Hashference forwards tools, response_format and the raw reasoning object,
+# and maps reasoning_effort to OpenRouter's reasoning.effort for none|minimal|low|medium|high|xhigh only (max is not forwarded, so it is left out).
+# Prompt caching: cache_control markers are removed, so there are no explicit cache writes.
+# APIs: Chat Completions and Responses, checked live 2026-11-02.
+schema = 2
+base_model = "deepseek/deepseek-v4.1-flash"
+
+[capabilities]
+tools = { supported = true, choice = ["auto", "none", "required", "tool"] }
+reasoning = { supported = true, effort = ["none", "low", "high"] }
+structured_output = true
+
+[cost.text.input]
+price = 0.054
+cache = { read = 0.0072 }
+
+[cost.text.output]
+price = 0.6
+
+[api.chat-completions]
+
+[api.responses]
+base_url = "https://hashference.com/v1"
+sdk = { aisdk = "@ai-sdk/openai", opencodeai = "@opencode/ai/providers/openai-compatible/responses" }

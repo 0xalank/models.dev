@@ -1,0 +1,9 @@
+# Hashference: one OpenAI- and Anthropic-compatible API and balance for open and frontier models.
+# Featured models are served by Dominant Inference on Hashference's own Gaudi hardware; the rest are relayed through OpenRouter.
+# Catalog: https://hashference.com/v1/catalog. Keys: https://hashference.com/keys.
+name = "Hashference"
+env = ["HASHFERENCE_API_KEY"]
+npm = "@ai-sdk/openai-compatible"
+opencodeai = "@opencode/ai/providers/openai-compatible"
+api = "https://hashference.com/v1"
+doc = "https://hashference.com/models"

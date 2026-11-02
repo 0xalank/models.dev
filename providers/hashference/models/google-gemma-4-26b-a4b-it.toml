@@ -1,0 +1,25 @@
+# Relayed through OpenRouter. Price and limits: https://hashference.com/models/google-gemma-4-26b-a4b-it and https://hashference.com/v1/catalog (credits per million tokens; 1,000 credits = $1).
+# Capabilities follow providers/openrouter/models/google/gemma-4-26b-a4b-it.toml: Hashference forwards tools, response_format and the raw reasoning object,
+# and maps reasoning_effort to OpenRouter's reasoning.effort for none|minimal|low|medium|high|xhigh only.
+# Prompt caching: cache_control markers are removed, so there are no explicit cache writes.
+# APIs: Chat Completions and Responses, checked live 2026-11-02.
+schema = 2
+base_model = "google/gemma-4-26b-a4b-it"
+
+[capabilities]
+tools = { supported = true, choice = ["auto", "none", "required", "tool"] }
+reasoning = { supported = true, toggle = true }
+structured_output = true
+
+[cost.text.input]
+price = 0.1152
+cache = { read = 0.0576 }
+
+[cost.text.output]
+price = 0.3468
+
+[api.chat-completions]
+
+[api.responses]
+base_url = "https://hashference.com/v1"
+sdk = { aisdk = "@ai-sdk/openai", opencodeai = "@opencode/ai/providers/openai-compatible/responses" }

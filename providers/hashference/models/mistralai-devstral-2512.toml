@@ -1,0 +1,24 @@
+# Relayed through OpenRouter. Price and limits: https://hashference.com/models/mistralai-devstral-2512 and https://hashference.com/v1/catalog (credits per million tokens; 1,000 credits = $1).
+# Capabilities follow providers/openrouter/models/mistralai/devstral-2512.toml: Hashference forwards tools, response_format and the raw reasoning object,
+# and maps reasoning_effort to OpenRouter's reasoning.effort for none|minimal|low|medium|high|xhigh only.
+# Prompt caching: cache_control markers are removed, so there are no explicit cache writes.
+# APIs: Chat Completions and Responses, checked live 2026-11-02.
+schema = 2
+base_model = "mistral/devstral-2512"
+
+[capabilities]
+tools = { supported = true, choice = ["auto", "none", "required", "tool"] }
+structured_output = true
+
+[cost.text.input]
+price = 0.48
+cache = { read = 0.048 }
+
+[cost.text.output]
+price = 2.4
+
+[api.chat-completions]
+
+[api.responses]
+base_url = "https://hashference.com/v1"
+sdk = { aisdk = "@ai-sdk/openai", opencodeai = "@opencode/ai/providers/openai-compatible/responses" }

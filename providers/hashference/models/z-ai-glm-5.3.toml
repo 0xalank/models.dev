@@ -1,0 +1,25 @@
+# Relayed through OpenRouter. Price and limits: https://hashference.com/models/z-ai-glm-5.3 and https://hashference.com/v1/catalog (credits per million tokens; 1,000 credits = $1).
+# Capabilities follow providers/openrouter/models/z-ai/glm-5.3.toml: Hashference forwards tools, response_format and the raw reasoning object,
+# and maps reasoning_effort to OpenRouter's reasoning.effort for none|minimal|low|medium|high|xhigh only (max is not forwarded, so it is left out).
+# Prompt caching: cache_control markers are removed, so there are no explicit cache writes.
+# APIs: Chat Completions and Responses, checked live 2026-11-02.
+schema = 2
+base_model = "zhipuai/glm-5.3"
+
+[capabilities]
+tools = { supported = true, choice = ["auto", "none", "required", "tool"] }
+reasoning = { supported = true, effort = ["low", "high"] }
+structured_output = true
+
+[cost.text.input]
+price = 0.096
+cache = { read = 0.0912 }
+
+[cost.text.output]
+price = 4.32
+
+[api.chat-completions]
+
+[api.responses]
+base_url = "https://hashference.com/v1"
+sdk = { aisdk = "@ai-sdk/openai", opencodeai = "@opencode/ai/providers/openai-compatible/responses" }

@@ -1,0 +1,23 @@
+# Relayed through OpenRouter. Price and limits: https://hashference.com/models/meta-llama-llama-3.2-1b-instruct and https://hashference.com/v1/catalog (credits per million tokens; 1,000 credits = $1).
+# Capabilities follow providers/openrouter/models/meta-llama/llama-3.2-1b-instruct.toml: Hashference forwards tools, response_format and the raw reasoning object,
+# and maps reasoning_effort to OpenRouter's reasoning.effort for none|minimal|low|medium|high|xhigh only.
+# Prompt caching: cache_control markers are removed, so there are no explicit cache writes.
+# APIs: Chat Completions and Responses, checked live 2026-11-02.
+schema = 2
+base_model = "meta/llama-3.2-1b-instruct"
+
+[capabilities]
+tools = { supported = false }
+structured_output = false
+
+[cost.text.input]
+price = 0.0324
+
+[cost.text.output]
+price = 0.2412
+
+[api.chat-completions]
+
+[api.responses]
+base_url = "https://hashference.com/v1"
+sdk = { aisdk = "@ai-sdk/openai", opencodeai = "@opencode/ai/providers/openai-compatible/responses" }

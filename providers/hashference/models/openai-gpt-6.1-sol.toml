@@ -1,0 +1,30 @@
+# Relayed through OpenRouter. Price and limits: https://hashference.com/models/openai-gpt-6.1-sol and https://hashference.com/v1/catalog (credits per million tokens; 1,000 credits = $1).
+# Capabilities follow providers/openrouter/models/openai/gpt-6.1-sol.toml: Hashference forwards tools, response_format and the raw reasoning object,
+# and maps reasoning_effort to OpenRouter's reasoning.effort for none|minimal|low|medium|high|xhigh only (max is not forwarded, so it is left out).
+# Prompt caching: cache_control markers are removed, so there are no explicit cache writes; automatic caching is billed at the cached-input price.
+# Input: Hashference serves only the base price tier, so input stops at 271,999 tokens.
+# APIs: Chat Completions and Responses, checked live 2026-11-02.
+schema = 2
+base_model = "openai/gpt-6.1-sol"
+
+[capabilities]
+tools = { supported = true, choice = ["auto", "none", "required", "tool"] }
+reasoning = { supported = true, effort = ["low", "medium", "high", "xhigh"] }
+structured_output = true
+cache = { implicit = true }
+
+[limit]
+input = 271_999
+
+[cost.text.input]
+price = 2.4
+cache = { read = 0.12 }
+
+[cost.text.output]
+price = 12
+
+[api.chat-completions]
+
+[api.responses]
+base_url = "https://hashference.com/v1"
+sdk = { aisdk = "@ai-sdk/openai", opencodeai = "@opencode/ai/providers/openai-compatible/responses" }

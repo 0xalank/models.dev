@@ -1,0 +1,28 @@
+# Served by Dominant Inference on Hashference's own Gaudi hardware.
+# Price and limits: https://hashference.com/models/hashference-qwen3.8-27b and https://hashference.com/v1/catalog (credits per million tokens; 1,000 credits = $1).
+# Chat Completions only: /v1/responses answers "Responses is not enabled for this endpoint" (live 2026-11-02).
+# Text only. Thinking is off on this endpoint: replies carry no reasoning field and reasoning_effort is ignored (live 2026-11-02).
+schema = 2
+base_model = "alibaba/qwen3.8-27b"
+
+[modalities]
+input = ["text"]
+output = ["text"]
+
+[capabilities]
+tools = { supported = true }
+reasoning = { supported = false }
+
+[limit]
+context = 163_840
+input = 98_304
+output = 8192
+
+[cost.text.input]
+price = 0.0018
+cache = { read = 0.00045 }
+
+[cost.text.output]
+price = 0.0225
+
+[api.chat-completions]

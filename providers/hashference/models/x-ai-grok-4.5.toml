@@ -1,0 +1,30 @@
+# Relayed through OpenRouter. Price and limits: https://hashference.com/models/x-ai-grok-4.5 and https://hashference.com/v1/catalog (credits per million tokens; 1,000 credits = $1).
+# Capabilities follow providers/openrouter/models/x-ai/grok-4.5.toml: Hashference forwards tools, response_format and the raw reasoning object,
+# and maps reasoning_effort to OpenRouter's reasoning.effort for none|minimal|low|medium|high|xhigh only.
+# Prompt caching: cache_control markers are removed, so there are no explicit cache writes; automatic caching is billed at the cached-input price.
+# Input: Hashference serves only the base price tier, so input stops at 199,999 tokens.
+# APIs: Chat Completions and Responses, checked live 2026-11-02.
+schema = 2
+base_model = "xai/grok-4.5"
+
+[capabilities]
+tools = { supported = true, choice = ["auto", "none", "required", "tool"] }
+reasoning = { supported = true, effort = ["low", "medium", "high"] }
+structured_output = true
+cache = { implicit = true }
+
+[limit]
+input = 199_999
+
+[cost.text.input]
+price = 2.4
+cache = { read = 0.36 }
+
+[cost.text.output]
+price = 7.2
+
+[api.chat-completions]
+
+[api.responses]
+base_url = "https://hashference.com/v1"
+sdk = { aisdk = "@ai-sdk/openai", opencodeai = "@opencode/ai/providers/openai-compatible/responses" }

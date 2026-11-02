@@ -1,0 +1,29 @@
+# Served by Dominant Inference on Hashference's own Gaudi hardware.
+# Price and limits: https://hashference.com/models/hashference-deepseek-v4.1-flash and https://hashference.com/v1/catalog (credits per million tokens; 1,000 credits = $1).
+# Chat Completions only: /v1/responses answers "Responses is not enabled for this endpoint" (live 2026-11-02).
+# Text only. Thinking is off on this endpoint: replies carry no reasoning field and reasoning_effort is ignored (live 2026-11-02).
+# Function tools are not enabled on this endpoint; a request with tools is refused.
+schema = 2
+base_model = "deepseek/deepseek-v4.1-flash"
+
+[modalities]
+input = ["text"]
+output = ["text"]
+
+[capabilities]
+tools = { supported = false }
+reasoning = { supported = false }
+
+[limit]
+context = 1_048_576
+input = 98_304
+output = 8192
+
+[cost.text.input]
+price = 0.027
+cache = { read = 0.0036 }
+
+[cost.text.output]
+price = 0.3
+
+[api.chat-completions]
